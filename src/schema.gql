@@ -1,0 +1,72 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Book {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateBookInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+input LoginUserInput {
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  createBook(createBookInput: CreateBookInput!): Book!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  removeBook(id: Int!): Book!
+  removeUser(id: Int!): User!
+  signup(signupUserInput: SignupUserInput!): User!
+  updateBook(updateBookInput: UpdateBookInput!): Book!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Query {
+  book(id: Int!): Book!
+  books: [Book!]!
+  user(username: String!): User!
+  users: [User!]!
+}
+
+input SignupUserInput {
+  name: String!
+  password: String!
+  username: String!
+}
+
+input UpdateBookInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateUserInput {
+  id: Int!
+  name: String
+  password: String
+  username: String
+}
+
+type User {
+  createdAt: DateTime!
+  id: Int!
+  name: String!
+  updatedAt: DateTime!
+  username: String!
+}
