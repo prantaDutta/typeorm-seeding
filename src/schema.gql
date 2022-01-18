@@ -3,13 +3,18 @@
 # ------------------------------------------------------
 
 type Book {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  createdAt: DateTime!
+  desc: String!
+  id: Int!
+  rating: Int!
+  title: String!
+  uniqueBookId: String!
+  updatedAt: DateTime!
 }
 
 input CreateBookInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  desc: String!
+  title: String!
 }
 
 """
@@ -30,18 +35,26 @@ input LoginUserInput {
 type Mutation {
   createBook(createBookInput: CreateBookInput!): Book!
   login(loginUserInput: LoginUserInput!): LoginResponse!
-  removeBook(id: Int!): Book!
+  removeBook(id: Int!): Book
   removeUser(id: Int!): User!
   signup(signupUserInput: SignupUserInput!): User!
-  updateBook(updateBookInput: UpdateBookInput!): Book!
+  updateBook(updateBookInput: UpdateBookInput!): Book
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Query {
-  book(id: Int!): Book!
+  book(id: Int!): Book
   books: [Book!]!
   user(username: String!): User!
   users: [User!]!
+}
+
+"""The basic Role"""
+enum Role {
+  Admin
+  Author
+  Librarian
+  User
 }
 
 input SignupUserInput {
@@ -51,9 +64,9 @@ input SignupUserInput {
 }
 
 input UpdateBookInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  desc: String
   id: Int!
+  title: String
 }
 
 input UpdateUserInput {
@@ -67,6 +80,7 @@ type User {
   createdAt: DateTime!
   id: Int!
   name: String!
+  role: Role!
   updatedAt: DateTime!
   username: String!
 }

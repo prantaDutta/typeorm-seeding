@@ -4,7 +4,6 @@ import { UpdateUserInput } from './dto/update-user.input'
 import { Repository } from 'typeorm'
 import { User } from './entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
-import { hash } from 'argon2'
 
 @Injectable()
 export class UsersService {
@@ -17,7 +16,7 @@ export class UsersService {
     const newUser = this.usersRepository.create({
       name,
       username,
-      password: await hash(password),
+      password,
     })
 
     return this.usersRepository.save(newUser)

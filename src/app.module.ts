@@ -7,9 +7,13 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { BooksModule } from './books/books.module'
 import ormConfig from '../ormconfig'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot(ormConfig),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),

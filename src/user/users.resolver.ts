@@ -4,6 +4,8 @@ import { User } from './entities/user.entity'
 import { UpdateUserInput } from './dto/update-user.input'
 import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
+import { RoleGuard } from './role.guard'
+import { Role } from './role.enum'
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -11,6 +13,7 @@ export class UsersResolver {
 
   @Query(() => [User], { name: 'users' })
   @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard(Role.Admin))
   findAll() {
     return this.userService.findAll()
   }

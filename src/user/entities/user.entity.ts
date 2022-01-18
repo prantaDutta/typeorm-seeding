@@ -1,11 +1,14 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { Role } from '../role.enum'
+import { hash } from 'argon2'
 
 @ObjectType()
 @Entity('user')
@@ -25,6 +28,14 @@ export class User {
   @Column()
   password: string
 
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.User,
+  })
+  @Field(() => Role)
+  role: Role
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
@@ -39,4 +50,9 @@ export class User {
   })
   @Field()
   updatedAt: Date
+
+  @BeforeInsert()
+  async setPassword(password: string) {
+    this.password = await hash(password || this.password)
+  }
 }

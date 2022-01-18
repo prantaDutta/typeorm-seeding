@@ -1,6 +1,6 @@
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
+// import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
 
-const ormConfig: PostgresConnectionOptions = {
+const ormConfig: any = {
   type: 'postgres',
   database: 'library',
   username: 'postgres',
@@ -9,9 +9,11 @@ const ormConfig: PostgresConnectionOptions = {
   // entities: [],
   entities: ['dist/**/*.entity{ .ts,.js}'],
   migrations: ['dist/**/*.migration{.ts,.js}'],
+  seeds: ['src/seeds/**/*{.ts,.js}'],
+  factories: ['src/factories/**/*{.ts,.js}'],
   synchronize: true,
   cli: {
-    migrationsDir: 'src/db/migrations',
+    migrationsDir: 'src/migrations',
   },
 }
 
