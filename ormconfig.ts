@@ -1,20 +1,9 @@
-// import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
+import { ConfigModule } from '@nestjs/config'
+import databaseConfig from './src/config/database.config'
 
-const ormConfig: any = {
-  type: 'postgres',
-  database: 'library',
-  username: 'postgres',
-  password: 'password',
-  logging: true,
-  // entities: [],
-  entities: ['dist/**/*.entity{ .ts,.js}'],
-  migrations: ['dist/**/*.migration{.ts,.js}'],
-  seeds: ['src/seeds/**/*{.ts,.js}'],
-  factories: ['src/factories/**/*{.ts,.js}'],
-  synchronize: true,
-  cli: {
-    migrationsDir: 'src/migrations',
-  },
-}
+ConfigModule.forRoot({
+  isGlobal: true,
+  load: [databaseConfig],
+})
 
-export default ormConfig
+export default databaseConfig()

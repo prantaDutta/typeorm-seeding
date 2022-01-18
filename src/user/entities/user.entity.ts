@@ -11,7 +11,7 @@ import { Role } from '../role.enum'
 import { hash } from 'argon2'
 
 @ObjectType()
-@Entity('user')
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
@@ -41,7 +41,7 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   @Field()
-  createdAt: Date
+  created_at: Date
 
   @UpdateDateColumn({
     type: 'timestamp',
@@ -49,7 +49,7 @@ export class User {
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
   @Field()
-  updatedAt: Date
+  updated_at: Date
 
   @BeforeInsert()
   async setPassword(password: string) {

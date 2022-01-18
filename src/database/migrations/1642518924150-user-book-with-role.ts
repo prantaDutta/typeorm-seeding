@@ -1,10 +1,10 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class userBookAdded1642499238298 implements MigrationInterface {
-    name = 'userBookAdded1642499238298'
+export class userBookWithRole1642518924150 implements MigrationInterface {
+    name = 'userBookWithRole1642518924150'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "user" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "username" character varying NOT NULL, "password" character varying NOT NULL, "role" "public"."user_role_enum" NOT NULL DEFAULT 'user', "createdAt" TIMESTAMP NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, "updatedAt" TIMESTAMP NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "user" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "username" character varying NOT NULL, "password" character varying NOT NULL, "role" "public"."user_role_enum" NOT NULL DEFAULT 'User', "createdAt" TIMESTAMP NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, "updatedAt" TIMESTAMP NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "book" ("id" SERIAL NOT NULL, "uniqueBookId" character varying NOT NULL, "title" character varying NOT NULL, "desc" character varying NOT NULL, "rating" integer NOT NULL DEFAULT '1', "createdAt" TIMESTAMP NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, "updatedAt" TIMESTAMP NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, CONSTRAINT "PK_a3afef72ec8f80e6e5c310b28a4" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "book_authors_user" ("bookId" integer NOT NULL, "userId" integer NOT NULL, CONSTRAINT "PK_977cc65b1d1089769fb370a22f9" PRIMARY KEY ("bookId", "userId"))`);
         await queryRunner.query(`CREATE INDEX "IDX_7775ae6ef3e1a4e3c1e391e795" ON "book_authors_user" ("bookId") `);

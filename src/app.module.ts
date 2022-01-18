@@ -6,16 +6,24 @@ import { AuthModule } from './auth/auth.module'
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { BooksModule } from './books/books.module'
-import ormConfig from '../ormconfig'
-import { ConfigModule } from '@nestjs/config'
-import { ConfigModule } from './config/config.module';
+import { DatabaseModule } from './database/database.module'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import databaseConfig from './config/database.config'
 
 @Module({
   imports: [
+    // ConfigModule,
+    // TypeOrmModule.forRoot(ormConfig),
     ConfigModule.forRoot({
       isGlobal: true,
+      load: [databaseConfig],
     }),
-    TypeOrmModule.forRoot(ormConfig),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        ...configService.get('database'),
+      }),
+    }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
@@ -24,6 +32,7 @@ import { ConfigModule } from './config/config.module';
     AuthModule,
     BooksModule,
     ConfigModule,
+    DatabaseModule,
   ],
   providers: [AppService],
 })

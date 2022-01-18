@@ -1,7 +1,7 @@
 import { define } from 'typeorm-seeding'
 import Faker from 'faker'
-import { User } from '../entities/user.entity'
-import { Role } from '../role.enum'
+import { User } from '../../user/entities/user.entity'
+import { Role } from '../../user/role.enum'
 
 const randomEnumValue = (enumeration) => {
   const values = Object.keys(enumeration)
