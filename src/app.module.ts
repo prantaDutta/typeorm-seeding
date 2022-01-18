@@ -8,6 +8,7 @@ import { join } from 'path'
 import { BooksModule } from './books/books.module'
 import ormConfig from '../ormconfig'
 import { ConfigModule } from '@nestjs/config'
+import { ConfigModule } from './config/config.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config'
     UsersModule,
     AuthModule,
     BooksModule,
+    ConfigModule,
   ],
   providers: [AppService],
 })
