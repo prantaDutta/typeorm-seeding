@@ -15,6 +15,7 @@ type Book {
 input CreateBookInput {
   desc: String!
   title: String!
+  userId: [Int!]!
 }
 
 """
@@ -67,6 +68,7 @@ input UpdateBookInput {
   desc: String
   id: Int!
   title: String
+  userId: [Int!]
 }
 
 input UpdateUserInput {
@@ -77,10 +79,10 @@ input UpdateUserInput {
 }
 
 type User {
-  createdAt: DateTime!
+  created_at: DateTime!
   id: Int!
   name: String!
   role: Role!
-  updatedAt: DateTime!
+  updated_at: DateTime!
   username: String!
 }

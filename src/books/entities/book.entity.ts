@@ -12,7 +12,7 @@ import { v4 } from 'uuid'
 import { User } from '../../user/entities/user.entity'
 
 @ObjectType()
-@Entity('books')
+@Entity('book')
 export class Book {
   @PrimaryGeneratedColumn()
   @Field(() => Int)

@@ -27,7 +27,7 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`
+    return this.usersRepository.findOneOrFail(id)
   }
 
   findOneByUsername(username: string): Promise<User | null> {

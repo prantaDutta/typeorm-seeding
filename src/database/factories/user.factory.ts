@@ -18,5 +18,6 @@ define(User, (faker: typeof Faker) => {
   user.username = faker.internet.userName()
   user.role = randomEnumValue(Role)
   user.password = '123'
+  console.log('Something')
   return user
 })

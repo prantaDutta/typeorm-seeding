@@ -11,7 +11,7 @@ import { Role } from '../role.enum'
 import { hash } from 'argon2'
 
 @ObjectType()
-@Entity('users')
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
